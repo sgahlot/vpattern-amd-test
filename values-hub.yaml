@@ -71,10 +71,10 @@ clusterGroup:
       project: hello-world
       path: charts/all/hello-world
     dataprep:
-      name: dataprep-03
+      name: dataprep
       namespace: amd-llm
       project: amd-llm
-      path: charts/all/dataprep-03
+      path: charts/all/dataprep
 
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
