@@ -75,13 +75,13 @@ clusterGroup:
       namespace: amd-llm
       project: amd-llm
       path: charts/all/dataprep-04
-    embedding-02:
-      name: embedding-02
-      namespace: amd-llm
-      project: amd-llm
-      path: charts/all/embedding-02
-    retriever-01:
-      name: retriever-01
+    # embedding-03:
+    #   name: embedding-03
+    #   namespace: amd-llm
+    #   project: amd-llm
+    #   path: charts/all/embedding
+    retriever-02:
+      name: retriever-02
       namespace: amd-llm
       project: amd-llm
       path: charts/all/retriever
