@@ -6,16 +6,16 @@ metadata:
     kompose.version: 1.33.0 (3ce457399)
     argocd.argoproj.io/compare-options: IgnoreExtraneous
     argocd.argoproj.io/sync-wave: "5"
-    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"embedding:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"embedding-server\")].image"}]'
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"dataprep:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"dataprep-02-server\")].image"}]'
   labels:
-    io.kompose.service: embedding
-  name: embedding
+    io.kompose.service: dataprep-02
+  name: dataprep-02
   namespace: {{ .Values.global.amdllm.namespace }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: embedding
+      io.kompose.service: dataprep-02
   template:
     metadata:
       annotations:
@@ -23,7 +23,7 @@ spec:
         kompose.version: 1.33.0 (3ce457399)
       labels:
         io.kompose.network/chatqna-default: "true"
-        io.kompose.service: embedding
+        io.kompose.service: dataprep-02
     spec:
       containers:
         - env:
@@ -31,23 +31,29 @@ spec:
               value: /tmp/temp-data
             - name: PYTHONPATH
               value: /home/user/.local/lib/python3.11/site-packages:/home/user
-            - name: TEI_EMBEDDING_ENDPOINT
-              value: http://tei-embedding-service.amd-llm.svc.cluster.local:8090
+            - name: REDIS_URL
+              value: redis://redis-vector-db.amd-llm.svc.cluster.local:6379
+            - name: INDEX_NAME
+              value: rag-redis
             {{- if .Values.global.amdllm.runtime_envs }}
             {{- range .Values.global.amdllm.runtime_envs }}
             - name: {{ .name }}
               value: {{ .value }}
             {{- end }}
             {{- end }}
-          image: {{ .Values.global.amdllm.embedding.image }}
-          name: embedding-server
+          image: {{ .Values.global.amdllm.dataprep.image }}
+          name: dataprep-02-server
           ports:
-            - containerPort: 6000
+            - containerPort: 6007
               protocol: TCP
           volumeMounts:
             - name: temp-data
               mountPath: /tmp/temp-data
+            - name: uploaded-files
+              mountPath: /home/user/comps/dataprep/redis/langchain/uploaded_files
       restartPolicy: Always
       volumes:
         - name: temp-data
+          emptyDir: {}
+        - name: uploaded-files
           emptyDir: {}

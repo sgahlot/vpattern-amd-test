@@ -1,0 +1,18 @@
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    haproxy.router.openshift.io/timeout: 86400s # long timeout for dataprep processing
+  name: dataprep-02-megaservice-route
+  namespace: {{ .Values.global.amdllm.namespace }}
+spec:
+  host: megaservice-{{ .Values.global.amdllm.namespace }}.apps.{{ .Values.global.clusterDomain }}
+  path: /v1/dataprep
+  port:
+    targetPort: 6007
+  to:
+    kind: Service
+    name: dataprep-02
+    weight: 100
+  wildcardPolicy: None

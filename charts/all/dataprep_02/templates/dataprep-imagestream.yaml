@@ -2,7 +2,7 @@
 apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
-  name: embedding
+  name: dataprep-02
   namespace: {{ .Values.global.amdllm.namespace }}
 spec:
   lookupPolicy:
