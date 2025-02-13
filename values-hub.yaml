@@ -80,6 +80,11 @@ clusterGroup:
       namespace: amd-llm
       project: amd-llm
       path: charts/all/embedding-02
+    retriever-01:
+      name: retriever-01
+      namespace: amd-llm
+      project: amd-llm
+      path: charts/all/retriever
 
 
   imperative:
