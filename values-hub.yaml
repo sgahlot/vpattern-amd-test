@@ -75,11 +75,11 @@ clusterGroup:
       namespace: amd-llm
       project: amd-llm
       path: charts/all/dataprep-04
-    embedding-01:
-      name: embedding-01
+    embedding-02:
+      name: embedding-02
       namespace: amd-llm
       project: amd-llm
-      path: charts/all/embedding
+      path: charts/all/embedding-02
 
 
   imperative:
