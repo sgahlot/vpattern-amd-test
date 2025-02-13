@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-app-configmap
+  labels:
+    app.kubernetes.io/instance: test-app
+# data:
+#   "index.html": |-
+#     <!DOCTYPE html>
+#       <html lang="en">
+#         <head>
+#           <meta charset="utf-8">
+#           <title>Python Microservice</title>
+#         </head>
+#           <body>
+#             <h1>Sample microservice written in Python!</h1>
+#             <br/>
+#             <h2>
+#             Hub Cluster domain is '{{ .Values.global.hubClusterDomain }}' <br>
+#             Pod is running on Local Cluster Domain '{{ .Values.global.localClusterDomain }}' <br>
+#             </h2>
+#             <h3>
+#             This microservice is written in Python with no external dependencies.
+#             </h3>
+#           </body>
+#       </html>
