@@ -70,7 +70,7 @@ clusterGroup:
       namespace: hello-world
       project: hello-world
       path: charts/all/hello-world
-    dataprep:
+    dataprep-04:
       name: dataprep-04
       namespace: amd-llm
       project: amd-llm
